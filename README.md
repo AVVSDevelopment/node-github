@@ -95,6 +95,12 @@ Other examples for the various authentication methods:
         clientSecret: 'your-client-secret'
     });
 
+    // Deprecated Gihub API token (seems not to be working with the v3 API)
+    github.authenticate({
+        type: "token",
+        token: token
+    });
+
 ## Implemented GitHub APIs
 
 * Gists: 100%
