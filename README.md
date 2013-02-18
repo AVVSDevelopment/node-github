@@ -85,10 +85,14 @@ Other examples for the various authentication methods:
         token: token
     });
 
+    // Client (used when making more than 60 unauthenticated calls an hour)
+    // http://developer.github.com/v3/#unauthenticated-rate-limited-requests
+
     // Deprecated Gihub API token (seems not to be working with the v3 API)
     github.authenticate({
-        type: "token",
-        token: token
+        type: "client",
+        clientID: 'your-client-id',
+        clientSecret: 'your-client-secret'
     });
 
 ## Implemented GitHub APIs
