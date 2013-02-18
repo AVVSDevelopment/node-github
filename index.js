@@ -391,12 +391,14 @@ var Client = module.exports = function(config) {
             this.auth = false;
             return;
         }
-        if (!options.type || "basic|oauth".indexOf(options.type) === -1)
-            throw new Error("Invalid authentication type, must be 'basic' or 'oauth'");
+        if (!options.type || "basic|oauth|client".indexOf(options.type) === -1)
+            throw new Error("Invalid authentication type, must be 'basic', 'oauth' or 'client'");
         if (options.type == "basic" && (!options.username || !options.password))
             throw new Error("Basic authentication requires both a username and password to be set");
         if (options.type == "oauth" && !options.token)
             throw new Error("OAuth2 authentication requires a token to be set");
+        if (options.type == "client" && (!options.clientID || !options.clientSecret))
+            throw new Error("Client authentication requires both the client id and the client secret to be set");
 
         this.auth = options;
     };
@@ -645,6 +647,11 @@ var Client = module.exports = function(config) {
                 case "basic":
                     basic = new Buffer(this.auth.username + ":" + this.auth.password, "ascii").toString("base64");
                     headers.authorization = "Basic " + basic;
+                    break;
+                case "client":
+                    path += (path.indexOf("?") === -1 ? "?" : "&") +
+                        "client_id=" + encodeURIComponent(this.auth.clientID) +
+                        "&client_secret=" + encodeURIComponent(this.auth.clientSecret);
                     break;
                 default:
                     break;
