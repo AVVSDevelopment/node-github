@@ -10,7 +10,7 @@
     "homepage": "http://github.com/mikedeboer/node-github",
     "repository" : {
         "type" : "git",
-        "url" : "http://github.com/mikedeboer/node-github.git"
+        "url" : "http://github.com/faceleg/node-github.git"
     },
     "engine" : {
         "node": ">=0.4.0"
